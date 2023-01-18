@@ -12,5 +12,6 @@ int main() {
 	return 0;
 }
 ```
+```
 Output:encoded data:MTIzNDU2
 ``
