@@ -48,6 +48,7 @@ std::string base64decode(std::string raw) {
 	bool* ret;
 	std::vector<bool> rawBin;
 	std::string  decoded = "";
+	int DelStringLength = raw.find("=")?raw.length() - raw.find("="):0;
 	for (auto i = raw.begin(); i != raw.end(); i++) {
 		int num = Base64Code.find(*i);
 		int tmp = 5;
@@ -61,17 +62,12 @@ std::string base64decode(std::string raw) {
 			rawBin.push_back(ret[i]);
 		}
 	}
-	for (auto i = rawBin.begin(); i != rawBin.end(); i += 8) {
+	for (auto i = rawBin.begin(); i != rawBin.end()-DelStringLength*8; i += 8) {
 		int tmp = 0;
 		for (auto j = i; j != i + 8; j++) {
 			tmp = tmp * 2 + !!(*j);
 		}
-		if (tmp == 0) {
-			decoded += "";
-		}
-		else {
-			decoded += tmp;
-		}
+		decoded += tmp;
 	}
 	return decoded;
 }
